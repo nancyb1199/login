@@ -47,9 +47,10 @@ app.post("/", function (req, res) {
       authenticated=false;
       console.log(authenticated);
       req.authenticated=false;
+      res.redirect('/');
     }
   }
-    res.render('error');
+    // res.render('error');
 })
 
 
