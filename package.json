@@ -1,0 +1,29 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "mustache": "^2.3.0",
+    "mustache-express": "^1.2.5",
+    "parseurl": "^1.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nancyb1199/login.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nancyb1199/login/issues"
+  },
+  "homepage": "https://github.com/nancyb1199/login#readme"
+}
