@@ -15,6 +15,12 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}));
+
 let users = [
   {user: "Nancy", pass: "test"},
   {user: "Mike", pass: "test2"}
@@ -33,29 +39,17 @@ app.post("/", function (req, res) {
     if(users[i].user === name && users[i].pass === pwd) {
       authenticated=true;
       console.log(authenticated);
+      res.render('user', {username: name});
+      break;
     }
     else {
       authenticated=false;
       console.log(authenticated);
+      res.redirect('/');
     }
   }
 })
 
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
-
-// Access the session as req.session
-app.get('/', function(req, res, next) {
-  if (req.session.views) {
-    req.session.views++
-    res.setHeader('Content-Type', 'text/html')
-    res.write('<p>views: ' + req.session.views + '</p>')
-    res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
-    res.end()
-  } else {
-    req.session.views = 1
-    res.end('welcome to the session demo. refresh!')
-  }
-})
 
 app.listen(3000, function () {
   console.log('Successfully started express application!');
