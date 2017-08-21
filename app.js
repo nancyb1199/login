@@ -39,12 +39,14 @@ app.post("/", function (req, res) {
     if(users[i].user === name && users[i].pass === pwd) {
       authenticated=true;
       console.log(authenticated);
+      req.authenticated=true;
       res.render('user', {username: name});
       break;
     }
     else {
       authenticated=false;
       console.log(authenticated);
+      req.authenticated=false;
       res.redirect('/');
     }
   }
