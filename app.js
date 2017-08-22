@@ -52,7 +52,8 @@ app.post("/", function (req, res) {
       res.render('user', {username: name});
   }
   else {
-    res.redirect('/');
+    // res.redirect('/');
+    res.render('error');
   }
 });
 
