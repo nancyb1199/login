@@ -26,6 +26,18 @@ let users = [
   {user: "Mike", pass: "test2"}
 ];
 
+function authUsers(req,name,pwd){
+  req.authenticated=false;
+  for (i=0; i<users.length; i++){
+    if(users[i].user === name && users[i].pass === pwd) {
+      authenticated=true;
+      console.log(authenticated);
+      req.authenticated=true;
+      return;
+    }
+  }
+}
+
 app.get('/', function(req, res){
   console.log("here");
   res.render('index');
@@ -35,23 +47,14 @@ app.post("/", function (req, res) {
   console.log("post");
   name = req.body.name;
   pwd = req.body.pwd;
-  for (i=0; i<users.length; i++){
-    if(users[i].user === name && users[i].pass === pwd) {
-      authenticated=true;
-      console.log(authenticated);
-      req.authenticated=true;
+  authUsers(req, name, pwd);
+  if (req.authenticated) {
       res.render('user', {username: name});
-      break;
-    }
-    else {
-      authenticated=false;
-      console.log(authenticated);
-      req.authenticated=false;
-      res.redirect('/');
-    }
   }
-    // res.render('error');
-})
+  else {
+    res.redirect('/');
+  }
+});
 
 
 app.listen(3000, function () {
